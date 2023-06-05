@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import useJsonApi, {
   JsonPlaceholderApi,
@@ -5,6 +6,7 @@ import useJsonApi, {
 } from "../../hooks/useJsonApi";
 import { AxiosResponse } from "axios";
 import { Card, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function PlaceHolderPage() {
   const api: JsonPlaceholderApi = useJsonApi();
@@ -26,24 +28,47 @@ export default function PlaceHolderPage() {
       </div>
       <Row>
         {users === null ? (
-          <div>Loading...</div>
+          <div className="loader"></div>
         ) : (
-          users.map((item, index) => {
+          users.map((user, index) => {
             return (
               <Col key={index} sm="4">
                 <Card className=" mb-4 rounded-3 shadow-sm border-primary">
                   <Card.Header className="card-header py-3 text-bg-primary border-primary">
-                    <h3>{item.username}</h3>
+                    <Card.Title>{user.username}</Card.Title>
                   </Card.Header>
                   <Card.Body>
-                    <h1 className="title">{item.name}</h1>
+                    <Card.Title
+                      style={{
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                      }}
+                      className="title"
+                    >
+                      {user.name}
+                    </Card.Title>
                     <ul className="list-unstyled mt-3 mb-4">
-                      <li>{item.phone}</li>
-                      <li>{item.email}</li>
-                      <li>{item.address.city}</li>
-                      <li>{item.company.name}</li>
+                      <li>
+                        <strong>Phone:</strong> {user.phone}
+                      </li>
+                      <li>
+                        <strong>email:</strong> {user.email}
+                      </li>
+                      <li>
+                        <strong>web:</strong> {user.website}
+                      </li>
+                      <li>
+                        <strong>City:</strong> {user.address.city}
+                      </li>
+                      <li>
+                        <strong>Company:</strong> {user.company.name}
+                      </li>
                     </ul>
                   </Card.Body>
+                  <Link className="btn btn-primary m-2" to={"/"}>
+                    Detail
+                  </Link>
                 </Card>
               </Col>
             );

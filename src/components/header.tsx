@@ -32,7 +32,7 @@ export default function Header() {
             Home
           </Link>
           <Link className="me-3 py-2 text-dark text-decoration-none" to="placeholder">
-            PlaceHolder
+            Users
           </Link>
           <Link className="me-3 py-2 text-dark text-decoration-none" to="/">
             Support
