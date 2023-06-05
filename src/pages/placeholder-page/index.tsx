@@ -66,7 +66,10 @@ export default function PlaceHolderPage() {
                       </li>
                     </ul>
                   </Card.Body>
-                  <Link className="btn btn-primary m-2" to={"/"}>
+                  <Link
+                    className="btn btn-primary m-2"
+                    to={"/placeholder/user/" + user.id}
+                  >
                     Detail
                   </Link>
                 </Card>

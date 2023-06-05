@@ -28,7 +28,7 @@ function App() {
             <Route path="placeholder">
               <Route index element={<PlaceHolderPage />} />
 
-              <Route path="user/:iserID">
+              <Route path="user/:userID">
                 <Route index element={<UserDetailPage />} />
 
                 <Route path="albums/:albumID" element={<AlbumsDetailPage />} />

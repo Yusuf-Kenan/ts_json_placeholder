@@ -25,6 +25,16 @@ export type JsonUserType = {
   };
 };
 
+export type JsonAlbumType = {
+  userId: number;
+  id: number;
+  title: string;
+};
+
+export type JsonPostType = JsonAlbumType & {
+  body: string;
+};
+
 export class JsonPlaceholderApi {
   private readonly axiosClient: Axios;
 
@@ -43,6 +53,38 @@ export class JsonPlaceholderApi {
       },
     });
     return result;
+  }
+
+  async getUser(userID: number) {
+    const result: AxiosResponse<JsonUserType> =
+      await this.axiosClient.get<JsonUserType>("users/" + userID);
+    return result.data;
+  }
+
+  async getAlbums(userID?: number, _start?: number, _limit?: number) {
+    const result: AxiosResponse<JsonAlbumType[]> = await this.axiosClient.get<
+      JsonAlbumType[]
+    >("albums", {
+      params: {
+        userID: userID,
+        _start: _start,
+        _limit: _limit,
+      },
+    });
+    return result.data;
+  }
+
+  async getPosts(userID?: number, _start?: number, _limit?: number) {
+    const result: AxiosResponse<JsonPostType[]> = await this.axiosClient.get<
+      JsonPostType[]
+    >("posts", {
+      params: {
+        userID: userID,
+        _start: _start,
+        _limit: _limit,
+      },
+    });
+    return result.data;
   }
 }
 
