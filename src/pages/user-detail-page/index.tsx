@@ -1,15 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import useJsonApi, {
   JsonAlbumType,
   JsonPostType,
   JsonUserType,
 } from "../../hooks/useJsonApi";
-import { useState } from "react";
+
 import { Col, Row } from "react-bootstrap";
 
-type UserDetailParamType = {
+import Loader from "../../components/loader/loader";
+import Box from "../../components/box";
+
+export type UserDetailParamType = {
   userID: string | undefined;
 };
 export default function UserDetailPage() {
@@ -46,12 +50,11 @@ export default function UserDetailPage() {
     })();
   }, []);
   if (!initState) {
-    return <div className="loader"></div>;
+    return <Loader />;
   }
   return (
     <>
       <h1 className="text-center">{user?.name}</h1>
-
       <Row>
         <Col sm="4">
           <ul className="list-unstyled mt-3 mb-4">
@@ -104,9 +107,34 @@ export default function UserDetailPage() {
       </Row>
 
       <hr />
-      <h1 className="text-center">Albums</h1>
+      <h2 className="text-center">
+        <span className="h4">Albums of</span>{" "}
+        <em className="text-success">{user?.name}</em>
+      </h2>
+      <Row>
+        {albums?.map((album, index) => {
+          return (
+            <Col sm={"3"}>
+              <Box />
+            </Col>
+          );
+        })}
+      </Row>
 
-      <Row></Row>
+      <hr />
+      <h2 className="text-center">
+        <span className="h4">Posts of</span>{" "}
+        <em className="text-warning">{user?.name}</em>
+      </h2>
+      <Row>
+        {posts?.map((post, index) => {
+          return (
+            <Col sm={"3"}>
+              <Box />
+            </Col>
+          );
+        })}
+      </Row>
     </>
   );
 }

@@ -7,6 +7,7 @@ import useJsonApi, {
 import { AxiosResponse } from "axios";
 import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/loader";
 
 export default function PlaceHolderPage() {
   const api: JsonPlaceholderApi = useJsonApi();
@@ -28,7 +29,7 @@ export default function PlaceHolderPage() {
       </div>
       <Row>
         {users === null ? (
-          <div className="loader"></div>
+          <Loader />
         ) : (
           users.map((user, index) => {
             return (
