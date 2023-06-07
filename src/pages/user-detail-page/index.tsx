@@ -40,8 +40,6 @@ export default function UserDetailPage() {
         setPosts(results[2] as JsonPostType[]);
         setInitState(true);
 
-        console.log("USER", user, albums, posts);
-
         //BU YONTEM UZUN SURER ONDAN YUKARIDAKI GIBI PROMISE.ALL ILE TEK SEFERDE ISTEK ATMAK DAHA DOGRU:
         // const userDetail = await api.getUser(parseInt(params.userID));
         // const albums = await api.getAlbums(parseInt(params.userID));
@@ -107,30 +105,30 @@ export default function UserDetailPage() {
       </Row>
 
       <hr />
-      <h2 className="text-center">
-        <span className="h4">Albums of</span>{" "}
+      <h2 className="text-center mt-5 mb-3">
+        <span className="h4">Albums of </span>{" "}
         <em className="text-success">{user?.name}</em>
       </h2>
       <Row>
-        {albums?.map((album, index) => {
+        {albums?.map((album: JsonAlbumType, index) => {
           return (
-            <Col sm={"3"}>
-              <Box />
+            <Col key={index} sm={"3"}>
+              <Box data={album} boxTitle="Album" linkTarget="/albums/" />
             </Col>
           );
         })}
       </Row>
 
       <hr />
-      <h2 className="text-center">
+      <h2 className="text-center mt-5 mb-3">
         <span className="h4">Posts of</span>{" "}
         <em className="text-warning">{user?.name}</em>
       </h2>
       <Row>
-        {posts?.map((post, index) => {
+        {posts?.map((post: JsonPostType, index) => {
           return (
-            <Col sm={"3"}>
-              <Box />
+            <Col key={index} sm={"3"}>
+              <Box data={post} boxTitle="Post" linkTarget="/posts/" />
             </Col>
           );
         })}

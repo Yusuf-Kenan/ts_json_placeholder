@@ -11,6 +11,6 @@ if (rootElement) {
       <App />
     </>
   );
-}else{
-  alert("Root Element couldn't found")
+} else {
+  alert("Root Element couldn't found");
 }

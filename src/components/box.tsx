@@ -1,11 +1,33 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { JsonAlbumType, JsonPostType } from "../hooks/useJsonApi";
 
-export default function Box() {
+export type BoxPropType = {
+  data: JsonAlbumType | JsonPostType;
+  boxTitle: string;
+  linkTarget: "/albums/" | "/posts/";
+};
+
+//TODO neden props.data.body gelmiyor bak!!!!!!!
+// export type BoxAlbumType = {
+//   data: JsonAlbumType;
+//   boxTitle: string;
+//   linkTarget: "/albums/" | "/posts/";
+// };
+
+// export type BoxPostType = {
+//     data: JsonPostType;
+//     boxTitle: string;
+//     linkTarget: "/albums/" | "/posts/";
+//   };
+
+export default function Box(props: BoxPropType) {
   return (
     <Card className=" mb-4 rounded-3 shadow-sm border-primary">
       <Card.Header className="card-header py-3 text-bg-primary border-primary">
-        <Card.Title>Example Title</Card.Title>
+        <Card.Title>
+          {props.boxTitle} {props.data.id}
+        </Card.Title>
       </Card.Header>
       <Card.Body>
         <Card.Title
@@ -16,27 +38,18 @@ export default function Box() {
           }}
           className="title"
         >
-          Example Title
+          {props.data.title}
         </Card.Title>
-        <ul className="list-unstyled mt-3 mb-4">
-          <li>
-            <strong>Phone:</strong> Example li
-          </li>
-          <li>
-            <strong>email:</strong> Example li
-          </li>
-          <li>
-            <strong>web:</strong> Example li
-          </li>
-          <li>
-            <strong>City:</strong> Example li
-          </li>
-          <li>
-            <strong>Company:</strong> Example li
-          </li>
-        </ul>
       </Card.Body>
-      <Link className="btn btn-primary m-2" to={"/placeholder/user/"}>
+      <Link
+        className="btn btn-primary m-2"
+        to={
+          "/placeholder/user/" +
+          props.data.userId +
+          props.linkTarget +
+          props.data.id
+        }
+      >
         Detail
       </Link>
     </Card>
