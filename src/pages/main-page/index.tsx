@@ -6,7 +6,7 @@ export default function MainPage() {
       </div>
       <hr />
       <h2>This App Built by Usin Json PlaceHolder API</h2>
-      <p></p>
+      <p>URL: https://jsonplaceholder.typicode.com/</p>
     </>
   );
 }
