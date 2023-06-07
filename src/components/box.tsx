@@ -25,9 +25,7 @@ export default function Box(props: BoxPropType) {
   return (
     <Card className=" mb-4 rounded-3 shadow-sm border-primary">
       <Card.Header className="card-header py-3 text-bg-primary border-primary">
-        <Card.Title>
-          {props.boxTitle} {props.data.id}
-        </Card.Title>
+        <Card.Title>{props.boxTitle}</Card.Title>
       </Card.Header>
       <Card.Body>
         <Card.Title
