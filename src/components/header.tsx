@@ -24,18 +24,21 @@ export default function Header() {
               fill="currentColor"
             ></path>
           </svg>
-          <span className="fs-4">Pricing example</span>
+          <span className="fs-2">Json PlaceHolder</span>
         </Link>
 
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
           <Link className="me-3 py-2 text-dark text-decoration-none" to="/">
             Home
           </Link>
-          <Link className="me-3 py-2 text-dark text-decoration-none" to="placeholder">
+          <Link
+            className="me-3 py-2 text-dark text-decoration-none"
+            to="placeholder"
+          >
             Users
           </Link>
           <Link className="me-3 py-2 text-dark text-decoration-none" to="/">
-            Support
+            Events
           </Link>
           <Link className="py-2 text-dark text-decoration-none" to="aboutus">
             About Us

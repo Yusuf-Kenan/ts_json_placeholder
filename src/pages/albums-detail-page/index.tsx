@@ -17,8 +17,8 @@ Could not find a declaration file for module '@splidejs/react-splide'. '/Users/n
 
 */
 export type AlbumParamsType = {
-  userID: string | undefined;
-  albumID: string | undefined;
+  userId: string | undefined;
+  albumId: string | undefined;
 };
 export default function AlbumsDetailPage() {
   const params = useParams<AlbumParamsType>();
@@ -30,16 +30,16 @@ export default function AlbumsDetailPage() {
   const [album, setAlbum] = useState<JsonAlbumType | null>(null);
 
   //useEffectten once kullaninca sorun cikardi....!!!!!
-  // if (!params.userID || !params.albumID) {
+  // if (!params.userId || !params.albumId) {
   //   return <h1>Something Went Wrong</h1>;
   // }
 
   useEffect(() => {
     (async () => {
       const promises = [];
-      promises.push(api.getUser(parseInt(params.userID as string)));
-      promises.push(api.getAlbum(parseInt(params.albumID as string)));
-      promises.push(api.getPhotos(parseInt(params.albumID as string)));
+      promises.push(api.getUser(parseInt(params.userId as string)));
+      promises.push(api.getAlbum(parseInt(params.albumId as string)));
+      promises.push(api.getPhotos(parseInt(params.albumId as string)));
 
       const results = await Promise.all(promises);
 
@@ -51,7 +51,7 @@ export default function AlbumsDetailPage() {
     })();
   }, []);
 
-  if (!params.userID || !params.albumID) {
+  if (!params.userId || !params.albumId) {
     return <h1>Something Went Wrong</h1>;
   }
 

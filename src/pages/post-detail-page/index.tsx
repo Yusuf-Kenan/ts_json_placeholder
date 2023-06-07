@@ -11,8 +11,8 @@ import { Badge, ListGroup } from "react-bootstrap";
 import Header from "../../components/header";
 
 export type PostParamType = {
-  userID: string | undefined;
-  postID: string | undefined;
+  userId: string | undefined;
+  postId: string | undefined;
 };
 
 export default function PostDetailPage() {
@@ -24,14 +24,14 @@ export default function PostDetailPage() {
   const [commets, setCommets] = useState<JsonCommetType[] | null>(null);
   const [initState, setInitState] = useState<boolean>(false);
 
-  // (!params.userID || !params.postID) && <div>Something Went Wrong</div>;
+  // (!params.userId || !params.postId) && <div>Something Went Wrong</div>;
 
   useEffect(() => {
     (async () => {
       const promises = [];
-      promises.push(api.getUser(parseInt(params.userID as string)));
-      promises.push(api.getPost(parseInt(params.postID as string)));
-      promises.push(api.getCommets(parseInt(params.postID as string)));
+      promises.push(api.getUser(parseInt(params.userId as string)));
+      promises.push(api.getPost(parseInt(params.postId as string)));
+      promises.push(api.getCommets(parseInt(params.postId as string)));
 
       const results = await Promise.all(promises);
 
@@ -43,7 +43,7 @@ export default function PostDetailPage() {
     })();
   }, []);
 
-  if (!params.userID || !params.postID) {
+  if (!params.userId || !params.postId) {
     return <>Something Went Wrong</>;
   }
 

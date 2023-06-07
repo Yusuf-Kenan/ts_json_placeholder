@@ -14,7 +14,7 @@ import Loader from "../../components/loader/loader";
 import Box from "../../components/box";
 
 export type UserDetailParamType = {
-  userID: string | undefined;
+  userId: string | undefined;
 };
 export default function UserDetailPage() {
   const [initState, setInitState] = useState<boolean>(false);
@@ -27,11 +27,11 @@ export default function UserDetailPage() {
 
   useEffect(() => {
     (async () => {
-      if (params.userID) {
+      if (params.userId) {
         const promises = [];
-        promises.push(api.getUser(parseInt(params.userID)));
-        promises.push(api.getAlbums(parseInt(params.userID)));
-        promises.push(api.getPosts(parseInt(params.userID)));
+        promises.push(api.getUser(parseInt(params.userId)));
+        promises.push(api.getAlbums(parseInt(params.userId)));
+        promises.push(api.getPosts(parseInt(params.userId)));
 
         const results = await Promise.all(promises);
 
@@ -41,9 +41,9 @@ export default function UserDetailPage() {
         setInitState(true);
 
         //BU YONTEM UZUN SURER ONDAN YUKARIDAKI GIBI PROMISE.ALL ILE TEK SEFERDE ISTEK ATMAK DAHA DOGRU:
-        // const userDetail = await api.getUser(parseInt(params.userID));
-        // const albums = await api.getAlbums(parseInt(params.userID));
-        // const posts = await api.getPosts(parseInt(params.userID));
+        // const userDetail = await api.getUser(parseInt(params.userId));
+        // const albums = await api.getAlbums(parseInt(params.userId));
+        // const posts = await api.getPosts(parseInt(params.userId));
       }
     })();
   }, []);

@@ -11,9 +11,9 @@ import PostDetailPage from "./pages/post-detail-page";
 
 /*
 URL ADRESSES:
-  /placeholder/users/userID/
-  /placeholder/users/userID/albums/albumID
-  /placeholder/users/userID/posts/postID
+  /placeholder/users/userId/
+  /placeholder/users/userId/albums/albumId
+  /placeholder/users/userId/posts/postId
 
   */
 function App() {
@@ -28,12 +28,12 @@ function App() {
             <Route path="placeholder">
               <Route index element={<PlaceHolderPage />} />
 
-              <Route path="user/:userID">
+              <Route path="user/:userId">
                 <Route index element={<UserDetailPage />} />
 
-                <Route path="albums/:albumID" element={<AlbumsDetailPage />} />
+                <Route path="albums/:albumId" element={<AlbumsDetailPage />} />
 
-                <Route path="posts/:postID" element={<PostDetailPage />} />
+                <Route path="posts/:postId" element={<PostDetailPage />} />
               </Route>
             </Route>
             <Route path="aboutus" element={<AboutUsPage />} />

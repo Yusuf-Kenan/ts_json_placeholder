@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios, { Axios, AxiosResponse } from "axios";
-import { PostParamType } from "../pages/post-detail-page";
 
 export type JsonUserType = {
   id: number;
@@ -72,36 +71,37 @@ export class JsonPlaceholderApi {
     return result;
   }
 
-  async getUser(userID: number) {
+  async getUser(userId: number) {
     const result: AxiosResponse<JsonUserType> =
-      await this.axiosClient.get<JsonUserType>("users/" + userID);
+      await this.axiosClient.get<JsonUserType>("users/" + userId);
     return result.data;
   }
 
-  async getAlbums(userID?: number, _start?: number, _limit?: number) {
+  async getAlbums(userId?: number, _start?: number, _limit?: number) {
+    const result: AxiosResponse<JsonAlbumType[]> = await this.axiosClient.get<
+      JsonAlbumType[]
+    >("albums", {
+      params: {
+        userId: userId,
+        _start: _start,
+        _limit: _limit,
+      },
+    });
+    return result.data;
+  }
+
+  async getAlbum(albumId: number) {
     const result: AxiosResponse<JsonAlbumType> =
-      await this.axiosClient.get<JsonAlbumType>("albums", {
-        params: {
-          userID: userID,
-          _start: _start,
-          _limit: _limit,
-        },
-      });
+      await this.axiosClient.get<JsonAlbumType>("albums/" + albumId);
     return result.data;
   }
 
-  async getAlbum(albumID: number) {
-    const result: AxiosResponse<JsonAlbumType> =
-      await this.axiosClient.get<JsonAlbumType>("albums/" + albumID);
-    return result.data;
-  }
-
-  async getPosts(userID?: number, _start?: number, _limit?: number) {
+  async getPosts(userId?: number, _start?: number, _limit?: number) {
     const result: AxiosResponse<JsonPostType[]> = await this.axiosClient.get<
       JsonPostType[]
     >("posts", {
       params: {
-        userID: userID,
+        userId: userId,
         _start: _start,
         _limit: _limit,
       },
@@ -109,18 +109,18 @@ export class JsonPlaceholderApi {
     return result.data;
   }
 
-  async getPost(postID: number) {
+  async getPost(postId: number) {
     const result: AxiosResponse<JsonPostType> =
-      await this.axiosClient.get<JsonPostType>("posts/" + postID);
+      await this.axiosClient.get<JsonPostType>("posts/" + postId);
     return result.data;
   }
 
-  async getPhotos(albumID?: number, _start?: number, _limit?: number) {
+  async getPhotos(albumId?: number, _start?: number, _limit?: number) {
     const result: AxiosResponse<JsonPhotoType[]> = await this.axiosClient.get<
       JsonPhotoType[]
     >("photos", {
       params: {
-        albumID: albumID,
+        albumId: albumId,
         _start: _start,
         _limit: _limit,
       },
@@ -129,12 +129,12 @@ export class JsonPlaceholderApi {
     return result.data;
   }
 
-  async getCommets(postID?: number, _start?: number, _limit?: number) {
+  async getCommets(postId?: number, _start?: number, _limit?: number) {
     const result: AxiosResponse<JsonCommetType[]> = await this.axiosClient.get<
       JsonCommetType[]
     >("comments", {
       params: {
-        postID: postID,
+        postId: postId,
         _start: _start,
         _limit: _limit,
       },
