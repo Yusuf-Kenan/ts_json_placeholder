@@ -7,6 +7,8 @@ import useJsonApi, {
 } from "../../hooks/useJsonApi";
 import Loader from "../../components/loader/loader";
 import UserInfo from "../../components/user-info";
+import { Badge, ListGroup } from "react-bootstrap";
+import Header from "../../components/header";
 
 export type PostParamType = {
   userID: string | undefined;
@@ -53,16 +55,33 @@ export default function PostDetailPage() {
     <>
       <div className="text-center">
         <em className="h2">{user?.name}:</em>{" "}
-        <small className="fs-3">{post?.id}</small>{" "}
-        <p className="fs-5">{post?.body}</p>
+        <p className="fs-5">{post?.body} </p>
       </div>
       <hr />
-
-      <ul className="list-unstyled mt-3 mb-4">
-        {commets === null ? <Loader /> : <li></li>}
-      </ul>
-      <hr />
-      <UserInfo user={user as JsonUserType} />
+      <ListGroup as="ul">
+        {commets !== null &&
+          commets.map((commet, index) => {
+            return (
+              <ListGroup.Item
+                key={index}
+                as="li"
+                className={`d-flex justify-content-between align-items-start ${
+                  index % 2 === 0
+                    ? "list-group-item-info"
+                    : "list-group-item-success"
+                }`}
+              >
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{commet.name}</div>
+                  {commet.body}
+                </div>
+                <Badge bg="warning" pill>
+                  {commet.email}
+                </Badge>
+              </ListGroup.Item>
+            );
+          })}
+      </ListGroup>
     </>
   );
 }
